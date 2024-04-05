@@ -27,8 +27,6 @@ export default function Home() {
     getTwoPokemon();
   }, []);
 
-  console.log(pokeArr);
-
   return (
     <>
       <header className="flex justify-between">
