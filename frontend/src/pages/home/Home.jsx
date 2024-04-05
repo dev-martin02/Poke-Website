@@ -1,17 +1,34 @@
 import { Link } from "react-router-dom";
 import { pokeApi } from "../../util/pokeApi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [pokeArr, setPokeArr] = useState([]);
 
   async function getTwoPokemon() {
-    const response = await fetch(pokeApi + "/pokemon?limit=2");
+    const response = await fetch(pokeApi + "/pokemon?limit=12");
     const data = await response.json();
-    console.log(data);
-    setPokeArr([data]);
+
+    const pokemonWithSprites = await Promise.all(
+      data.results.map(async ({ url }) => {
+        const response = await fetch(url);
+        const pokemonData = await response.json();
+        return {
+          name: pokemonData.name,
+          sprite: pokemonData.sprites.front_default,
+        };
+      })
+    );
+
+    setPokeArr(pokemonWithSprites);
   }
-  getTwoPokemon();
+
+  useEffect(() => {
+    getTwoPokemon();
+  }, []);
+
+  console.log(pokeArr);
+
   return (
     <>
       <header className="flex justify-between">
@@ -37,12 +54,11 @@ export default function Home() {
           <a href="#">Ice</a>
         </nav>
         <section id="PokemonCard" className="">
-          {pokeArr.map(({ results }) => (
+          {pokeArr.map(({ name, sprite }) => (
             <div className="mx-2 my-3 p-2 flex border-double border-4 border-red-500">
-              <img src="" alt="Pokemon Image" />
+              <img src={sprite} alt="Pokemon Image" />
               <div id="card-content" className=" mx-10">
-                <p>{results.name}</p>
-                <p>Type</p>
+                <p>{name}</p>
                 <button className="bg-transparent hover:bg-red-500 text-white-700 font-semibold hover:text-white my-2 py-1 px-2 border border-red-500 hover:border-transparent rounded">
                   See More
                 </button>
