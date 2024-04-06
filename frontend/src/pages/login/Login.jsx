@@ -15,8 +15,8 @@ export default function Login() {
       <Form>
         <label htmlFor="username">Username: </label>
         <input type="text" id="username" placeholder="Username" />
-        <label htmlFor="userpassword">Password: </label>
-        <input type="password" id="userpassword" placeholder="Password" />
+        <label htmlFor="userPassword">Password: </label>
+        <input type="password" id="userPassword" placeholder="Password" />
         <button type="submit">Submit</button>
         <button onClick={signUpPage}>Register</button>
       </Form>

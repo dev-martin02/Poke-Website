@@ -5,10 +5,7 @@ import { useState } from "react";
 // Todo: add more complex functionality and improve UI
 
 export default function SignUp() {
-  const [userPassword, setUserPassword] = useState({
-    password: "",
-    confirmPassword: "",
-  });
+  const [userPassword, setUserPassword] = useState({});
   const navigate = useNavigate();
 
   function handleChange(e) {
@@ -21,7 +18,7 @@ export default function SignUp() {
   function handleSubmit(e) {
     e.preventDefault();
     if (userPassword.password !== userPassword.confirmPassword) {
-      return alert("The password doesnt match");
+      return alert("The password doesn't match");
     }
     navigate("/login");
   }
@@ -40,7 +37,6 @@ export default function SignUp() {
           id="password"
           onChange={handleChange}
           name="password"
-          value={userPassword.password}
           placeholder="Password"
         />
 
@@ -49,7 +45,6 @@ export default function SignUp() {
           type="password"
           id="confiPass"
           placeholder="Confirm Password"
-          value={userPassword.confirmPassword}
           onChange={handleChange}
           name="confirmPassword"
         />

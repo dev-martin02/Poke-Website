@@ -6,20 +6,20 @@ export default function Home() {
   const [pokeArr, setPokeArr] = useState([]);
 
   async function getTwoPokemon() {
-    const response = await fetch(pokeApi + "/pokemon?limit=12");
+    const response = await fetch(pokeApi + "/pokemon?limit=9");
     const data = await response.json();
 
     const pokemonWithSprites = await Promise.all(
       data.results.map(async ({ url }) => {
         const response = await fetch(url);
         const pokemonData = await response.json();
+        console.log(pokemonData);
         return {
           name: pokemonData.name,
           sprite: pokemonData.sprites.front_default,
         };
       })
     );
-
     setPokeArr(pokemonWithSprites);
   }
 
