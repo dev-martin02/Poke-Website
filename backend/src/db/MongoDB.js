@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import { getEnvVariable } from "../utils/environment";
+import { getEnvVariable } from "../utils/environment.js";
 
 dotenv.config();
 
@@ -11,7 +11,7 @@ export async function ConnectToMongoDB() {
   try {
     await mongoose.connect(MONGO_DB_KEY);
     console.log("MongoDB connection successful!");
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error starting server:", error.message);
   }
 }
