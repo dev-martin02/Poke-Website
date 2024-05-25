@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 
 export default function TypeTag({ children, types }) {
   const [ringColor, setRingColor] = useState("");
+  console.log(types);
   useEffect(() => {
     switch (types) {
       case "fire":
-        setRingColor("ring-red-500");
+        setRingColor("ring-red-500 px-2");
         break;
       case "poison":
         setRingColor("ring-purple-500");

@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { pokeApi } from "../../util/pokeApi";
 import { useEffect, useState } from "react";
 import NavBar from "../../components/navBar/NavBars";
-import TypeTag from "../../components/typeTag/TypeTag";
 import PokeTypeNav from "./functions/PokeTypeNav";
+import PokemonCard from "../../components/pokemonCard/PokemonCard";
 
 /*
   Todo: Find a Better way to handle the fetch, should all the content of the fetch be in a store?
@@ -16,6 +16,7 @@ import PokeTypeNav from "./functions/PokeTypeNav";
 export default function Home() {
   const [pokeArr, setPokeArr] = useState([]);
 
+  // Can I out this in the store?
   async function getTwoPokemon() {
     const response = await fetch(pokeApi + "/pokemon?limit=9");
     const data = await response.json();
@@ -70,21 +71,7 @@ export default function Home() {
 
         <section id="PokemonCard" className="">
           {pokeArr.map(({ name, sprite, type }) => (
-            <div className="mx-2 my-3 p-2 flex shadow-xl ring-1 ring-slate-100">
-              <img src={sprite} alt="Pokemon Image" />
-              <div id="card-content" className="mx-10 flex flex-col">
-                <p>{name}</p>
-                <div>
-                  {type.map((element) => (
-                    <TypeTag types={element}>{element}</TypeTag>
-                  ))}
-                </div>
-                {/* Todo: Make a btn component that the background-color change in base of the pokemon type */}
-                <button className="bg-transparent hover:bg-gray-500 text-white-700 font-semibold hover:text-white my-2 py-1 px-2 border border-gray-500 hover:border-transparent rounded">
-                  See More
-                </button>
-              </div>
-            </div>
+            <PokemonCard name={name} sprite={sprite} type={type} />
           ))}
         </section>
       </main>
