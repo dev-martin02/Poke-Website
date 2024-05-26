@@ -1,24 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { pokeApi } from "../../util/pokeApi";
 import { useEffect, useState } from "react";
 import NavBar from "../../components/navBar/NavBars";
 import PokeTypeNav from "./functions/PokeTypeNav";
 import PokemonCard from "../../components/pokemonCard/PokemonCard";
+import { usePokeStore } from "../../store/store";
+import TypePokemon from "./functions/TypePokemon";
 
 /*
-  Todo: Find a Better way to handle the fetch, should all the content of the fetch be in a store?
-   **Keep in mind 
-    When the user click any type of pokemon the page should only render pokemon of that type and that will require another request
-
    When we click 'see more' we should see all the info of that particular pokemon, and that will request another fetch to the poke Api  
 */
 
 export default function Home() {
-  const [pokeArr, setPokeArr] = useState([]);
+  const { pokemonArr, setPokemonArr } = usePokeStore();
+  const params = useParams();
 
-  // Can I out this in the store?
   async function getTwoPokemon() {
-    const response = await fetch(pokeApi + "/pokemon?limit=9");
+    const response = await fetch(pokeApi + "/pokemon?limit=151");
     const data = await response.json();
 
     const pokemonWithSprites = await Promise.all(
@@ -36,12 +34,12 @@ export default function Home() {
         };
       })
     );
-    setPokeArr(pokemonWithSprites);
+    setPokemonArr(pokemonWithSprites);
   }
 
   useEffect(() => {
     getTwoPokemon();
-  }, []);
+  }, [params]);
   return (
     <>
       <header className="flex justify-between items-center py-4 px-8">
@@ -69,10 +67,19 @@ export default function Home() {
           <PokeTypeNav />
         </NavBar>
 
-        <section id="PokemonCard" className="">
-          {pokeArr.map(({ name, sprite, type }) => (
-            <PokemonCard name={name} sprite={sprite} type={type} />
-          ))}
+        <section id="PokemonCard">
+          {Object.keys(params).length > 0 ? (
+            <TypePokemon />
+          ) : (
+            pokemonArr.map(({ name, sprite, type }, index) => (
+              <PokemonCard
+                name={name}
+                sprite={sprite}
+                type={type}
+                index={index}
+              />
+            ))
+          )}
         </section>
       </main>
     </>

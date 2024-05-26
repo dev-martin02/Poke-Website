@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import TypeTag from "../typeTag/TypeTag";
 
-export default function PokemonCard({ name, sprite, type }) {
+export default function PokemonCard({ name, sprite, type, index }) {
   const [pokeCard, setPokeCard] = useState({});
 
   useEffect(() => {
@@ -19,6 +19,7 @@ export default function PokemonCard({ name, sprite, type }) {
           ringColor: "ring-red-500",
           background: "bg-red-500",
           fontColor: "text-white",
+          borderColor: "border-red-500",
         };
         setPokeCard(style);
         break;
@@ -50,9 +51,7 @@ export default function PokemonCard({ name, sprite, type }) {
         setPokeCard(style);
         break;
       default:
-        style = {
-          ringColor: "ring-gray-500",
-        };
+        style = {};
         setPokeCard(style);
     }
   }, [type]);
@@ -60,6 +59,7 @@ export default function PokemonCard({ name, sprite, type }) {
   return (
     <div
       className={`mx-2 my-3 p-2 flex shadow-xl ring-1 ${pokeCard.ringColor} `}
+      key={index}
     >
       <img src={sprite} alt="Pokemon Image" />
       <div id="card-content" className="mx-10 flex flex-col">
@@ -71,7 +71,7 @@ export default function PokemonCard({ name, sprite, type }) {
         </div>
         {/* Todo: Make a btn component that the background-color change in base of the pokemon type */}
         <button
-          className={`${pokeCard.background} ${pokeCard.fontColor} hover:bg-gray-500 text-white-700 font-semibold hover:text-white my-2 py-1 px-2 border border-gray-500 hover:border-transparent rounded`}
+          className={`${pokeCard.background} ${pokeCard.fontColor} ${pokeCard.borderColor} hover:bg-gray-500 text-white-700 font-semibold hover:text-white my-2 py-1 px-2 border hover:border-transparent rounded`}
         >
           See More
         </button>

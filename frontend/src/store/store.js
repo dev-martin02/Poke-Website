@@ -1,12 +1,20 @@
 import { create } from "zustand";
 
-const useRingColorStore = create((set) => ({
-  ringColor: "", // Initial state
-  setRingColor: (color) => set({ ringColor: color }), // Method to update the ringColor
-
+export const usePokeStore = create((set) => ({
   pokemonArr: [],
   setPokemonArr: (pokemonApi) =>
-    set({ pokemonArr: pokemonArr.push(pokemonApi) }),
-}));
+    set((state) => ({
+      pokemonArr: pokemonApi,
+    })),
 
-export default useRingColorStore;
+  currentPokemonType: [],
+  setCurrentPokemonType: (pokemonType) =>
+    set((state) => ({
+      currentPokemonType: [...state.currentPokemonType, pokemonType],
+    })),
+
+  resetCurrentPokemonType: () =>
+    set(() => ({
+      currentPokemonType: [],
+    })),
+}));
