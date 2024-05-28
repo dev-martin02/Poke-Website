@@ -3,7 +3,7 @@ import { create } from "zustand";
 export const usePokeStore = create((set) => ({
   pokemonArr: [],
   setPokemonArr: (pokemonApi) =>
-    set((state) => ({
+    set(() => ({
       pokemonArr: pokemonApi,
     })),
 

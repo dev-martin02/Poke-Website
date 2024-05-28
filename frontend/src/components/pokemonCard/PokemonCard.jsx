@@ -58,7 +58,7 @@ export default function PokemonCard({ name, sprite, type, index }) {
 
   return (
     <div
-      className={`mx-2 my-3 p-2 flex shadow-xl ring-1 ${pokeCard.ringColor} `}
+      className={`mx-2 my-3 p-2 flex shadow-xl ring-2 ${pokeCard.ringColor} lg:flex-row `}
       key={index}
     >
       <img src={sprite} alt="Pokemon Image" />

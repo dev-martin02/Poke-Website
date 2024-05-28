@@ -67,7 +67,10 @@ export default function Home() {
           <PokeTypeNav />
         </NavBar>
 
-        <section id="PokemonCard">
+        <section
+          id="PokemonCard"
+          className="sm:grid sm:grid-cols-2 lg:grid-cols-3 "
+        >
           {Object.keys(params).length > 0 ? (
             <TypePokemon />
           ) : (
