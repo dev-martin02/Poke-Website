@@ -19,6 +19,9 @@ export default function TypeTag({ children, types }) {
       case "water":
         setRingColor("ring-blue-600");
         break;
+      case "electric":
+        setRingColor("ring-yellow-400");
+        break;
       default:
         setRingColor("ring-gray-500");
     }
@@ -27,7 +30,7 @@ export default function TypeTag({ children, types }) {
   return (
     <>
       <span
-        className={`p-1 m-1 ring-1 ${ringColor} rounded-lg font-semibold text-sm`}
+        className={`p-1 m-1 ring-1 ${ringColor} rounded-lg font-semibold text-sm w-12 h-20`}
       >
         {children}
       </span>

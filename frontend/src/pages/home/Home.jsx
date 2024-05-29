@@ -63,26 +63,28 @@ export default function Home() {
           Welcome to the BEST POKEMON website{" "}
         </h2>
         {/* in mobile version this bar-nav should be able to drag to show all the pokemon type */}
-        <NavBar>
-          <PokeTypeNav />
-        </NavBar>
 
-        <section
-          id="PokemonCard"
-          className="sm:grid sm:grid-cols-2 lg:grid-cols-3 "
-        >
-          {Object.keys(params).length > 0 ? (
-            <TypePokemon />
-          ) : (
-            pokemonArr.map(({ name, sprite, type }, index) => (
-              <PokemonCard
-                name={name}
-                sprite={sprite}
-                type={type}
-                index={index}
-              />
-            ))
-          )}
+        <section className="ring-4 sm:flex ">
+          <NavBar>
+            <PokeTypeNav />
+          </NavBar>
+          <section
+            id="PokemonCard"
+            className=" ring-2 sm:grid sm:grid-cols-2 lg:grid-cols-3 "
+          >
+            {Object.keys(params).length > 0 ? (
+              <TypePokemon />
+            ) : (
+              pokemonArr.map(({ name, sprite, type }, index) => (
+                <PokemonCard
+                  name={name}
+                  sprite={sprite}
+                  type={type}
+                  index={index}
+                />
+              ))
+            )}
+          </section>
         </section>
       </main>
     </>

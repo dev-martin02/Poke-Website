@@ -30,7 +30,7 @@ export default function TypePokemon() {
 
   useEffect(() => {
     getPokemonType(pokemonType);
-  }, [pokemonType]);
+  }, [pokemonType, pokemonArr]);
 
   return (
     <>
