@@ -2,17 +2,15 @@ import { Link, useParams } from "react-router-dom";
 import { pokeApi } from "../../util/pokeApi";
 import { useEffect, useState } from "react";
 import NavBar from "../../components/navBar/NavBars";
-import PokeTypeNav from "./functions/PokeTypeNav";
+import PokeTypeNav from "../../components/navBar/PokeTypeNav";
 import PokemonCard from "../../components/pokemonCard/PokemonCard";
 import { usePokeStore } from "../../store/store";
-import TypePokemon from "./functions/TypePokemon";
-
-/*
-   When we click 'see more' we should see all the info of that particular pokemon, and that will request another fetch to the poke Api  
-*/
+import TypePokemon from "../../components/typeTag/TypePokemon";
+import Pagination from "../../components/pagination/Pagination";
 
 export default function Home() {
   const { pokemonArr, setPokemonArr } = usePokeStore();
+
   const params = useParams();
 
   async function getTwoPokemon() {
@@ -40,6 +38,7 @@ export default function Home() {
   useEffect(() => {
     getTwoPokemon();
   }, [params]);
+
   return (
     <>
       <header className="flex justify-between items-center py-4 px-8">
@@ -62,29 +61,32 @@ export default function Home() {
         <h2 className="flex justify-center text-xl font-bold">
           Welcome to the BEST POKEMON website{" "}
         </h2>
-        {/* in mobile version this bar-nav should be able to drag to show all the pokemon type */}
-
         <section className="ring-4 sm:flex ">
-          <NavBar>
-            <PokeTypeNav />
-          </NavBar>
-          <section
-            id="PokemonCard"
-            className=" ring-2 sm:grid sm:grid-cols-2 lg:grid-cols-3 "
-          >
-            {Object.keys(params).length > 0 ? (
-              <TypePokemon />
-            ) : (
-              pokemonArr.map(({ name, sprite, type }, index) => (
-                <PokemonCard
-                  name={name}
-                  sprite={sprite}
-                  type={type}
-                  index={index}
-                />
-              ))
-            )}
+          <section className="relative ">
+            <NavBar>
+              <PokeTypeNav />
+            </NavBar>
           </section>
+
+          <div className="flex justify-center">
+            <section
+              id="PokemonCard"
+              className="ring-2  gap-3  sm:grid sm:grid-cols-2 lg:grid-cols-5 "
+            >
+              {Object.keys(params).length > 0 ? (
+                <TypePokemon />
+              ) : (
+                pokemonArr.map(({ name, sprite, type }, index) => (
+                  <PokemonCard
+                    name={name}
+                    sprite={sprite}
+                    type={type}
+                    index={index}
+                  />
+                ))
+              )}
+            </section>
+          </div>
         </section>
       </main>
     </>

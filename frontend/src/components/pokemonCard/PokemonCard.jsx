@@ -3,10 +3,10 @@ import TypeTag from "../typeTag/TypeTag";
 
 const styles = {
   fire: {
-    ringColor: "ring-red-500",
-    background: "bg-red-500",
+    ringColor: "ring-orange-400",
+    background: "bg-orange-400",
     fontColor: "text-white",
-    borderColor: "border-red-500",
+    borderColor: "border-orange-400",
   },
   poison: {
     ringColor: "ring-purple-500",
@@ -51,25 +51,25 @@ export default function PokemonCard({ name, sprite, type, index }) {
 
   return (
     <div
-      className={`mx-2 my-3 p-2 flex shadow-xl ring-2 ${pokeCard.ringColor} lg:flex-row`}
+      className={`rounded-md grid grid-cols-2 p-2 gap-7 shadow-xl ${pokeCard.ringColor}  ${pokeCard.background} h-28 w-48`}
       key={index}
     >
-      <img src={sprite} alt="Pokemon Image" />
-      <div id="card-content" className="mx-10 flex flex-col">
+      <div className={`flex flex-col justify-between ${pokeCard.fontColor}`}>
         <p>{name}</p>
-        <div>
+        <div className="flex flex-col-reverse mb-0">
           {type.map((element) => (
             <TypeTag key={element} types={element}>
               {element}
             </TypeTag>
           ))}
         </div>
+      </div>
 
-        <button
-          className={`${pokeCard.background} ${pokeCard.fontColor} ${pokeCard.borderColor} hover:bg-gray-500 text-white-700 font-semibold hover:text-white my-2 py-1 px-2 border hover:border-transparent rounded`}
-        >
-          See More
-        </button>
+      <div className="flex flex-col">
+        <button>#06</button>
+        <div class=" h-16 w-20 ">
+          <img class=" w-max h-max" src={sprite} alt="pokemon Sprite" />
+        </div>
       </div>
     </div>
   );
