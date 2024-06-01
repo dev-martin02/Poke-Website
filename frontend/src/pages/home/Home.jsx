@@ -9,12 +9,17 @@ import TypePokemon from "../../components/typeTag/TypePokemon";
 import Pagination from "../../components/pagination/Pagination";
 
 export default function Home() {
-  const { pokemonArr, setPokemonArr } = usePokeStore();
+  /*
+ improve Mobile design and change the background color depending of the type
+ add functionality to Login and choose a type
+ Once you are in the page display random pokemon 
+*/
+  const { pokemonArr, setPokemonArr, currentPages } = usePokeStore();
 
   const params = useParams();
 
   async function getTwoPokemon() {
-    const response = await fetch(pokeApi + "/pokemon?limit=151");
+    const response = await fetch(pokeApi + "/pokemon?limit=1000");
     const data = await response.json();
 
     const pokemonWithSprites = await Promise.all(
@@ -39,11 +44,12 @@ export default function Home() {
     getTwoPokemon();
   }, [params]);
 
+  const changeThisVariable = currentPages || pokemonArr;
+
   return (
     <>
       <header className="flex justify-between items-center py-4 px-8">
         <h1 className="text-xl font-bold">Poke-Website</h1>
-
         <nav className="flex items-center">
           <a href="#" className="ml-4">
             Home
@@ -61,7 +67,7 @@ export default function Home() {
         <h2 className="flex justify-center text-xl font-bold">
           Welcome to the BEST POKEMON website{" "}
         </h2>
-        <section className="ring-4 sm:flex ">
+        <section className=" sm:flex ">
           <section className="relative ">
             <NavBar>
               <PokeTypeNav />
@@ -71,19 +77,23 @@ export default function Home() {
           <div className="flex justify-center">
             <section
               id="PokemonCard"
-              className="ring-2  gap-3  sm:grid sm:grid-cols-2 lg:grid-cols-5 "
+              className="  gap-3  sm:grid sm:grid-cols-2  md:grid-cols-4 lg:grid-cols-5 "
             >
               {Object.keys(params).length > 0 ? (
                 <TypePokemon />
               ) : (
-                pokemonArr.map(({ name, sprite, type }, index) => (
-                  <PokemonCard
-                    name={name}
-                    sprite={sprite}
-                    type={type}
-                    index={index}
-                  />
-                ))
+                <>
+                  {changeThisVariable.map(({ name, sprite, type }, index) => (
+                    <PokemonCard
+                      name={name}
+                      sprite={sprite}
+                      type={type}
+                      index={index}
+                    />
+                  ))}
+
+                  <Pagination arr={pokemonArr} />
+                </>
               )}
             </section>
           </div>

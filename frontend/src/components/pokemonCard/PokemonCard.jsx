@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import TypeTag from "../typeTag/TypeTag";
+import Pagination from "../pagination/Pagination";
+import { usePokeStore } from "../../store/store";
 
 const styles = {
   fire: {
@@ -41,6 +43,7 @@ const styles = {
 };
 
 export default function PokemonCard({ name, sprite, type, index }) {
+  const { pokemonArr } = usePokeStore();
   const [pokeCard, setPokeCard] = useState({});
 
   useEffect(() => {
@@ -50,27 +53,28 @@ export default function PokemonCard({ name, sprite, type, index }) {
   }, [type]);
 
   return (
-    <div
-      className={`rounded-md grid grid-cols-2 p-2 gap-7 shadow-xl ${pokeCard.ringColor}  ${pokeCard.background} h-28 w-48`}
-      key={index}
-    >
-      <div className={`flex flex-col justify-between ${pokeCard.fontColor}`}>
-        <p>{name}</p>
-        <div className="flex flex-col-reverse mb-0">
-          {type.map((element) => (
-            <TypeTag key={element} types={element}>
-              {element}
-            </TypeTag>
-          ))}
+    <>
+      <div
+        className={`rounded-md grid grid-cols-2 p-2 gap-7 shadow-xl ${pokeCard.ringColor}  ${pokeCard.background} h-28 w-48`}
+        key={index}
+      >
+        <div className={`flex flex-col justify-between ${pokeCard.fontColor}`}>
+          <p>{name}</p>
+          <div className="flex flex-col-reverse mb-0">
+            {type.map((element) => (
+              <TypeTag key={element} types={element}>
+                {element}
+              </TypeTag>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className="flex flex-col">
-        <button>#06</button>
-        <div class=" h-16 w-20 ">
-          <img class=" w-max h-max" src={sprite} alt="pokemon Sprite" />
+        <div className="flex flex-col">
+          <div class=" h-16 w-20 ">
+            <img class=" w-max h-max" src={sprite} alt="pokemon Sprite" />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

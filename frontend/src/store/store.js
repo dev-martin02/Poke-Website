@@ -10,11 +10,12 @@ export const usePokeStore = create((set) => ({
   currentPokemonType: [],
   setCurrentPokemonType: (pokemonType) =>
     set((state) => ({
-      currentPokemonType: [...state.currentPokemonType, pokemonType],
+      currentPokemonType: pokemonType,
     })),
 
-  resetCurrentPokemonType: () =>
+  currentPages: [],
+  setCurrentPages: (pokemonApi) =>
     set(() => ({
-      currentPokemonType: [],
+      currentPages: pokemonApi,
     })),
 }));
