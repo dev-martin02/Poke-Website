@@ -55,7 +55,7 @@ export default function PokemonCard({ name, sprite, type, index }) {
   return (
     <>
       <div
-        className={`rounded-md grid grid-cols-2 p-2 gap-7 shadow-xl ${pokeCard.ringColor}  ${pokeCard.background} h-28 w-48`}
+        className={`rounded-md grid grid-cols-2 p-3 gap-7 shadow-xl ${pokeCard.ringColor}  ${pokeCard.background} h-28 w-48`}
         key={index}
       >
         <div className={`flex flex-col justify-between ${pokeCard.fontColor}`}>

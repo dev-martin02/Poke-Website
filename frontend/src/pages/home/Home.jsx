@@ -77,7 +77,7 @@ export default function Home() {
           <div className="flex justify-center">
             <section
               id="PokemonCard"
-              className="  gap-3  sm:grid sm:grid-cols-2  md:grid-cols-4 lg:grid-cols-5 "
+              className="  gap-3  sm:grid sm:grid-cols-3  lg:grid-cols-5 "
             >
               {Object.keys(params).length > 0 ? (
                 <TypePokemon />

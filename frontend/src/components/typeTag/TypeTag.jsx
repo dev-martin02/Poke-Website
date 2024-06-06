@@ -49,7 +49,7 @@ export default function TypeTag({ children, types }) {
 
   return (
     <div
-      className={`flex justify-center align-middle ring-1 mb-1 ring-white rounded-lg font-semibold text-sm`}
+      className={`flex justify-center align-middle ring-1 p-1 mt-1 ring-white rounded-lg font-semibold text-sm`}
     >
       {/* How can I make the icon color be a certain color?  */}
       {ringColor && (
