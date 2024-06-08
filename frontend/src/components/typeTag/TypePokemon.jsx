@@ -33,7 +33,7 @@ export default function TypePokemon() {
         currentPages.map(({ name, sprite, type }) => (
           <PokemonCard name={name} type={type} sprite={sprite} />
         ))}
-      <Pagination arr={currentPokemonType} />
+      {/* <Pagination arr={currentPokemonType} /> */}
     </>
   );
 }

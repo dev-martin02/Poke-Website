@@ -1,37 +1,30 @@
 import { Link } from "react-router-dom";
-import fire from "../../assets/icons/fire.svg";
-import grass from "../../assets/icons/grass.svg";
-import water from "../../assets/icons/water.svg";
-import Flying from "../../assets/icons/flying.svg";
-import Poison from "../../assets/icons/poison.svg";
-import Electric from "../../assets/icons/electric.svg";
 
+import pokemonStyle from "../pokemonStyle";
+
+Object.keys(pokemonStyle).map((pokemonType) => {
+  console.log(pokemonStyle[pokemonType]);
+});
 export default function PokeTypeNav() {
-  const types = [
-    { name: "Fire", imgIcon: fire, className: "bg-orange-500 text-white" },
-    { name: "Water", imgIcon: water, className: "bg-blue-600 text-white" },
-    { name: "Grass", imgIcon: grass, className: "bg-lime-600 text-white" },
-    {
-      name: "Electric",
-      imgIcon: Electric,
-      className: "bg-yellow-300  text-white",
-    },
-    { name: "Poison", imgIcon: Poison, className: "bg-purple-500 text-white" },
-    { name: "Flying", imgIcon: Flying, className: "bg-sky-200  text-white" },
-  ];
-
   return (
     <>
-      {types.map((type, index) => (
+      {Object.keys(pokemonStyle).map((pokemonType, index) => (
         <div
-          className={`p-2 m-2 rounded-lg font-semibold text-sm flex align-middle ${type.className}`}
+          className={`p-2 m-2 rounded-lg font-semibold text-sm flex align-middle ${pokemonStyle[pokemonType].background} ${pokemonStyle[pokemonType].fontColor}`}
         >
-          <img src={type.imgIcon} alt="" className=" h-5" />
-          <Link key={index} to={`/${type.name}`}>
-            {type.name}
+          <img
+            src={pokemonStyle[pokemonType].backgroundImg}
+            alt=""
+            className=" h-5"
+          />
+          <Link key={index} to={`/${pokemonType}`}>
+            {pokemonType}
           </Link>
         </div>
       ))}
+      {/* {Object.keys(pokemonStyle).map((pokemonType) => (
+        <p>{pokemonType}</p>
+      ))} */}
     </>
   );
 }

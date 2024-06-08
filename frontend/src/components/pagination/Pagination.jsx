@@ -32,12 +32,23 @@ const Pagination = ({ arr }) => {
     setCurrentPages(currentPageOfPokemon);
   }, [arr, currentPage, setCurrentPages]);
 
+  useEffect(() => {
+    setCurrentPage(1);
+    setCurrentButtonSet(0);
+  }, [arr]);
+
   const handlePreviousSet = () => {
     setCurrentButtonSet((prev) => Math.max(prev - 1, 0));
   };
 
   const handleNextSet = () => {
-    setCurrentButtonSet((prev) => Math.min(prev + 1, totalButtonSets - 1));
+    if (
+      !currentButtons.find((numberInThisRow) => numberInThisRow === currentPage)
+    ) {
+      setCurrentButtonSet((prev) => Math.min(prev + 1, totalButtonSets - 1));
+    } else {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
   const currentButtons = pages.slice(
@@ -47,8 +58,12 @@ const Pagination = ({ arr }) => {
 
   return (
     <>
-      <div>
-        {currentButtonSet > 0 && <button>Previous</button>}
+      <div className="ring-2 m-2 w-40 p-1">
+        {currentButtonSet > 0 && (
+          <button onClick={handlePreviousSet} className="">
+            Previous
+          </button>
+        )}
         {currentButtons.map((pageNumber) => (
           <button
             key={pageNumber}
@@ -56,11 +71,14 @@ const Pagination = ({ arr }) => {
             style={{
               fontWeight: currentPage === pageNumber ? "bold" : "normal",
             }}
+            className="m-1"
           >
             {pageNumber}
           </button>
         ))}
-        {currentButtonSet < totalButtonSets - 1 && <button>Next</button>}
+        {currentButtonSet < totalButtonSets - 1 && (
+          <button onClick={handleNextSet}>Next</button>
+        )}
       </div>
     </>
   );

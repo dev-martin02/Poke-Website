@@ -14,12 +14,13 @@ export default function Home() {
  add functionality to Login and choose a type
  Once you are in the page display random pokemon 
 */
-  const { pokemonArr, setPokemonArr, currentPages } = usePokeStore();
+  const { pokemonArr, setPokemonArr, currentPages, currentPokemonType } =
+    usePokeStore();
 
   const params = useParams();
 
   async function getTwoPokemon() {
-    const response = await fetch(pokeApi + "/pokemon?limit=1000");
+    const response = await fetch(pokeApi + "/pokemon?limit=400");
     const data = await response.json();
 
     const pokemonWithSprites = await Promise.all(
@@ -44,7 +45,8 @@ export default function Home() {
     getTwoPokemon();
   }, [params]);
 
-  const changeThisVariable = currentPages || pokemonArr;
+  const pokemons = currentPages.length > 0 || pokemonArr;
+  const currentPage = currentPokemonType || pokemonArr;
 
   return (
     <>
@@ -74,7 +76,7 @@ export default function Home() {
             </NavBar>
           </section>
 
-          <div className="flex justify-center">
+          <div className="flex justify-center flex-col align-middle  items-center">
             <section
               id="PokemonCard"
               className="  gap-3  sm:grid sm:grid-cols-3  lg:grid-cols-5 "
@@ -83,7 +85,7 @@ export default function Home() {
                 <TypePokemon />
               ) : (
                 <>
-                  {changeThisVariable.map(({ name, sprite, type }, index) => (
+                  {pokemons.map(({ name, sprite, type }, index) => (
                     <PokemonCard
                       name={name}
                       sprite={sprite}
@@ -91,11 +93,10 @@ export default function Home() {
                       index={index}
                     />
                   ))}
-
-                  <Pagination arr={pokemonArr} />
                 </>
               )}
             </section>
+            <Pagination arr={currentPage} />
           </div>
         </section>
       </main>
