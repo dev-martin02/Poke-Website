@@ -32,8 +32,8 @@ export default function PokemonCard({ name, sprite, type, index }) {
         </div>
 
         <div className="flex flex-col">
-          <div class=" h-16 w-20 ">
-            <img class=" w-max h-max" src={sprite} alt="pokemon Sprite" />
+          <div className=" h-16 w-20 ">
+            <img className=" w-max h-max" src={sprite} alt="pokemon Sprite" />
           </div>
         </div>
       </div>
