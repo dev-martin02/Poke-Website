@@ -1,7 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { pokeApi } from "../../util/pokeApi";
 import { useEffect, useState } from "react";
-import NavBar from "../../components/navBar/NavBars";
 import PokeTypeNav from "../../components/navBar/PokeTypeNav";
 import PokemonCard from "../../components/pokemonCard/PokemonCard";
 import { usePokeStore } from "../../store/store";
@@ -70,16 +69,14 @@ export default function Home() {
           Welcome to the BEST POKEMON website{" "}
         </h2>
         <section className=" sm:flex ">
-          <section className="relative ">
-            <NavBar>
-              <PokeTypeNav />
-            </NavBar>
+          <section className=" sm:relative ">
+            <PokeTypeNav />
           </section>
 
-          <div className="flex justify-center flex-col align-middle  items-center">
+          <div className="flex justify-center flex-col align-middle items-center  ">
             <section
               id="PokemonCard"
-              className="  gap-3  sm:grid sm:grid-cols-3  lg:grid-cols-5 "
+              className="gap-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 "
             >
               {Object.keys(params).length > 0 ? (
                 <TypePokemon />

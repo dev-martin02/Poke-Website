@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 import pokemonStyle from "../pokemonStyle";
 import { useState } from "react";
 import leftArrow from "../../assets/icons/leftArrow.svg";
-import rigthArrow from "../../assets/icons/rigthArrow.svg";
+import rightArrow from "../../assets/icons/rigthArrow.svg";
 
 export default function PokeTypeNav() {
   const [currentTypePage, setCurrentTypePage] = useState(0);
   // Make an arr with all the type of pokemon
   const arrPokemonType = Object.keys(pokemonStyle);
 
-  const tagPerPage = 5; // how many type you would like to show
+  const tagPerPage = 6; // how many type you would like to show
 
   // how many page that will have 5 tags will fit in the div with the current arrPokemonType
   const totalPageLength = Math.ceil(arrPokemonType.length / tagPerPage);
@@ -33,16 +33,17 @@ export default function PokeTypeNav() {
   const handlePrevious = () => setCurrentTypePage(currentTypePage - 1);
 
   return (
-    <>
+    <nav className="flex sm:flex-col align-middle justify-around w-52">
+      {/* Create a button where it shows all the pokemon Types to choose */}
       <div className="flex flex-row-reverse ">
-        {currentTypePage < 3 && (
+        {currentTypePage < 2 && (
           <button onClick={handleNext} className="w-10">
-            <img src={rigthArrow} alt="" />
+            <img src={rightArrow} alt="rightArrow" />
           </button>
         )}
         {currentTypePage > 0 && (
           <button onClick={handlePrevious} className="w-10">
-            <img src={leftArrow} alt="" />
+            <img src={leftArrow} alt="leftArrow" />
           </button>
         )}
       </div>
@@ -61,6 +62,6 @@ export default function PokeTypeNav() {
           </Link>
         </div>
       ))}
-    </>
+    </nav>
   );
 }
