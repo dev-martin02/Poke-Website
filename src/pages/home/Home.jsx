@@ -9,12 +9,17 @@ import Pagination from "../../components/pagination/Pagination";
 
 export default function Home() {
   /*
- improve Mobile design and change the background color depending of the type
- add functionality to Login and choose a type
- Once you are in the page display random pokemon 
-*/
+    Improve navBar in mobile design when I click the choose type button it should display a big div in top of everything showing all the type of pokemon
+    Add loading state
+  */
   const { pokemonArr, setPokemonArr, currentPages, currentPokemonType } =
     usePokeStore();
+
+  const [chooseTypeDiv, setChooseTypeDiv] = useState(true);
+
+  function showTypeDiv() {
+    setChooseTypeDiv(!chooseTypeDiv);
+  }
 
   const params = useParams();
 
@@ -51,16 +56,8 @@ export default function Home() {
     <>
       <header className="flex justify-between items-center py-4 px-8">
         <h1 className="text-xl font-bold">Poke-Website</h1>
-        <nav className="flex items-center">
-          <a href="#" className="ml-4">
-            Home
-          </a>
-          <Link to="/login" className="ml-4">
-            Login
-          </Link>
-          <a href="#" className="ml-4">
-            Choose a Type
-          </a>
+        <nav className="flex items-center sm:hidden">
+          <button onClick={showTypeDiv}>Choose a Type</button>
         </nav>
       </header>
 
@@ -68,15 +65,22 @@ export default function Home() {
         <h2 className="flex justify-center text-xl font-bold">
           Welcome to the BEST POKEMON website{" "}
         </h2>
-        <section className=" sm:flex ">
-          <section className=" sm:relative ">
+
+        <section className="sm:flex">
+          {chooseTypeDiv && (
+            <section className="absolute">
+              <PokeTypeNav />
+            </section>
+          )}
+
+          <section className=" hidden sm:relative">
             <PokeTypeNav />
           </section>
 
           <div className="flex justify-center flex-col align-middle items-center  ">
             <section
               id="PokemonCard"
-              className="gap-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 "
+              className="gap-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6"
             >
               {Object.keys(params).length > 0 ? (
                 <TypePokemon />

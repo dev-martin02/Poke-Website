@@ -33,7 +33,7 @@ export default function PokeTypeNav() {
   const handlePrevious = () => setCurrentTypePage(currentTypePage - 1);
 
   return (
-    <nav className="flex sm:flex-col align-middle justify-around w-52">
+    <nav className=" bg-white sm:flex sm:flex-col align-middle justify-around w-52">
       {/* Create a button where it shows all the pokemon Types to choose */}
       <div className="flex flex-row-reverse ">
         {currentTypePage < 2 && (
@@ -48,20 +48,22 @@ export default function PokeTypeNav() {
         )}
       </div>
 
-      {currentPageOfPokemon.map((pokemonType, index) => (
-        <div
-          className={`p-2 m-2 rounded-lg font-semibold text-sm flex align-middle ${pokemonStyle[pokemonType].background} ${pokemonStyle[pokemonType].fontColor}`}
-        >
-          <img
-            src={pokemonStyle[pokemonType].backgroundImg}
-            alt=""
-            className=" h-5"
-          />
-          <Link key={index} to={`/${pokemonType}`}>
-            {pokemonType}
-          </Link>
-        </div>
-      ))}
+      <section className="bg-white p-1">
+        {currentPageOfPokemon.map((pokemonType, index) => (
+          <div
+            className={`p-2 m-2 rounded-lg font-semibold text-sm flex align-middle ${pokemonStyle[pokemonType].background} ${pokemonStyle[pokemonType].fontColor}`}
+          >
+            <img
+              src={pokemonStyle[pokemonType].backgroundImg}
+              alt="pokemon-type-icon"
+              className="h-5"
+            />
+            <Link key={index} to={`/${pokemonType}`}>
+              {pokemonType}
+            </Link>
+          </div>
+        ))}
+      </section>
     </nav>
   );
 }
